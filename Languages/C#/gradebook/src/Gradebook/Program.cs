@@ -1,17 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Gradebook {
     class Program {
-        static void Main (string[] args) {
+        static void Main(string[] args) {
 
-            double x = 34.1;
-            double y = 245.12;
+            List<double> grades = new List<double>() { 12.5, 34.5, 78.32 };
 
-            Console.Beep ();
+            double result = 0.0;
 
-            Console.WriteLine (x + y);
+            foreach (double number in grades) {
+                result += number;
+            }
 
-            Console.WriteLine ("Hello World!");
+            result /= grades.Count;
+
+            Console.WriteLine($"Average score of grades is {result:N2}");
+
         }
     }
 }
