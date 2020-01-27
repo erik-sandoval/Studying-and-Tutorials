@@ -13,7 +13,11 @@ namespace Gradebook {
             book.AddGrade(78.32);
             book.AddGrade(52.35);
 
-            book.ShowStatistics();
+            var stats = book.GetStatistics();
+
+            Console.WriteLine($"Average score of grades is {stats.Average:N2}");
+            Console.WriteLine($"Lowest score of grades is {stats.Low:N2}");
+            Console.WriteLine($"Highest score of grades is {stats.High:N2}");
 
         }
     }
