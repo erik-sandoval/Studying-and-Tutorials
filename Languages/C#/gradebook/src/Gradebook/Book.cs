@@ -5,6 +5,7 @@ namespace Gradebook {
     public class Book {
         List<double> grades;
         public string Name;
+        public char Letter;
 
         public Book(string name) {
             grades = new List<double>();
@@ -14,6 +15,8 @@ namespace Gradebook {
         public void AddGrade(double grade) {
             if (grade <= 100 && grade >= 0) {
                 grades.Add(grade);
+            } else {
+                throw new ArgumentException($"Invalid {nameof(grade)}");
             }
         }
 
@@ -30,6 +33,24 @@ namespace Gradebook {
             }
 
             Average /= grades.Count;
+
+            switch (Average) {
+                case var d when d >= 90.0:
+                    Letter = 'A';
+                break;
+                case var d when d >= 80.0:
+                    Letter = 'B';
+                break;
+                case var d when d >= 70.0:
+                    Letter = 'C';
+                break;
+                case var d when d >= 60.0:
+                    Letter = 'D';
+                break;
+                default:
+                    Letter = 'F';
+                    break;
+            }
 
             return new Statistics(Average, highGrade, lowGrade);
         }
