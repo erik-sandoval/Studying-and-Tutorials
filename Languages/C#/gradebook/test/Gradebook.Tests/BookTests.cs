@@ -2,9 +2,9 @@ using System;
 using Xunit;
 
 namespace Gradebook.Tests {
-    public class UnitTest1 {
+    public class BookTests {
         [Fact]
-        public void Test1() {
+        public void BookCalculatesAnAverageGrade() {
             var book = new Book("Test Book");
             book.AddGrade(89.1);
             book.AddGrade(90.5);
