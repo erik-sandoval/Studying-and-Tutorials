@@ -6,6 +6,7 @@ namespace Gradebook {
         static void Main(string[] args) {
 
             var book = new Book("Erik's Gradebook");
+            book.GradeAdded += OnGradeAdded;
 
             while (true) {
                 Console.WriteLine("Please input a grade between 0 and 100");
@@ -32,6 +33,9 @@ namespace Gradebook {
             Console.WriteLine($"Highest score of grades is {stats.High:N2}");
             Console.WriteLine($"Student recieved an {book.Letter}");
 
+            static void OnGradeAdded(object sender, EventArgs e){
+                Console.WriteLine("Grade Added");
+            }
         }
     }
 }
