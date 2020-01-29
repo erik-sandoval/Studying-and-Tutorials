@@ -3,21 +3,47 @@ using System.Collections.Generic;
 
 namespace Gradebook {
     public delegate void GradeAddedDelegate(object sender, EventArgs args);
-    public class Book {
+
+    public class NamedObject {
+        public string Name { get; set; }
+
+        public NamedObject(string name) {
+            Name = name;
+        }
+
+    }
+
+    public interface IBook {
+        void AddGrade(double grade);
+        Statistics GetStatistics();
+        string Name { get; }
+        event GradeAddedDelegate GradeAdded;
+    }
+
+    public abstract class Book : NamedObject, IBook {
+        public Book(string name) : base(name) {}
+
+        public abstract event GradeAddedDelegate GradeAdded;
+
+        public abstract void AddGrade(double grade);
+
+        public abstract Statistics GetStatistics();
+    }
+
+    public class InMemoryBook : Book, IBook {
         List<double> grades;
-        public string Name;
         public char Letter;
 
-        public Book(string name) {
+        public InMemoryBook(string name) : base(name) {
             grades = new List<double>();
             Name = name;
         }
 
-        public void AddGrade(double grade) {
+        public override void AddGrade(double grade) {
             if (grade <= 100 && grade >= 0) {
                 grades.Add(grade);
 
-                if (GradeAdded != null){
+                if (GradeAdded != null) {
                     GradeAdded(this, new EventArgs());
                 }
             } else {
@@ -25,9 +51,9 @@ namespace Gradebook {
             }
         }
 
-        public event GradeAddedDelegate GradeAdded;
+        public override event GradeAddedDelegate GradeAdded;
 
-        public Statistics GetStatistics() {
+        public override Statistics GetStatistics() {
             double Average = 0;
             var highGrade = double.MinValue;
             var lowGrade = double.MaxValue;
