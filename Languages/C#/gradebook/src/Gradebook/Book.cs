@@ -54,38 +54,14 @@ namespace Gradebook {
         public override event GradeAddedDelegate GradeAdded;
 
         public override Statistics GetStatistics() {
-            double Average = 0;
-            var highGrade = double.MinValue;
-            var lowGrade = double.MaxValue;
+
+            var results = new Statistics();
 
             foreach (double number in grades) {
-                Average += number;
-
-                highGrade = Math.Max(number, highGrade);
-                lowGrade = Math.Min(number, lowGrade);
+                results.Add(number);
             }
 
-            Average /= grades.Count;
-
-            switch (Average) {
-                case var d when d >= 90.0:
-                    Letter = 'A';
-                break;
-                case var d when d >= 80.0:
-                    Letter = 'B';
-                break;
-                case var d when d >= 70.0:
-                    Letter = 'C';
-                break;
-                case var d when d >= 60.0:
-                    Letter = 'D';
-                break;
-                default:
-                    Letter = 'F';
-                    break;
-            }
-
-            return new Statistics(Average, highGrade, lowGrade);
+            return results;
         }
     }
 }
