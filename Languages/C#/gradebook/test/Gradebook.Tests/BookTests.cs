@@ -2,7 +2,25 @@ using System;
 using Xunit;
 
 namespace Gradebook.Tests {
+
+    public delegate string WriteLogDelegate(string logMessage);
     public class BookTests {
+
+        [Fact]
+        public void WriteLogDelegateCanPointToMethod() {
+            WriteLogDelegate log;
+
+            log = new WriteLogDelegate(ReturnMessage);
+
+            var result = log("test");
+
+            Assert.Equal("test", result);
+        }
+
+        string ReturnMessage(string message) {
+            return message;
+        }
+
         [Fact]
         public void BookCalculatesAnAverageGrade() {
             var book = new Book("Test Book");
