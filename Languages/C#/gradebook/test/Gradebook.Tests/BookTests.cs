@@ -33,7 +33,7 @@ namespace Gradebook.Tests {
             Assert.Equal(32.2, result.Low);
             Assert.Equal(90.5, result.High);
             Assert.Equal(70.6, result.Average, 1);
-            Assert.Equal('C', book.Letter);
+            Assert.Equal('C', result.Letter);
         }
     }
 }
