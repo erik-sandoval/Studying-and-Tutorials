@@ -1,25 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace ACM {
+namespace ACM.BL {
     public class Customer {
-
         public Customer() {
 
         }
-
         public Customer(int customerId) {
             CustomerId = customerId;
         }
-        public int CustomerId {
-            get;
-            private set;
-        }
-        public string EmailAddress { get; set; }
-        public string FirstName { get; set; }
 
-        private string _lastName;
-        public string LastName { get { return _lastName; } set { _lastName = value; } }
+        public int CustomerId { get; private set; }
+        public string EmailAddress { get; set; }
+
+        public string FirstName { get; set; }
 
         public string FullName {
             get {
@@ -36,18 +33,14 @@ namespace ACM {
 
         public static int InstanceCount { get; set; }
 
-        public Customer Retrieve(int customerId) {
-
-            return new Customer();
-        }
-
-        public List<Customer> Retrieve() {
-
-            return new List<Customer>();
-        }
-
-        public bool Save() {
-            return true;
+        private string _lastName;
+        public string LastName {
+            get {
+                return _lastName;
+            }
+            set {
+                _lastName = value;
+            }
         }
 
         public bool Validate() {
@@ -58,5 +51,6 @@ namespace ACM {
 
             return isValid;
         }
+
     }
 }
