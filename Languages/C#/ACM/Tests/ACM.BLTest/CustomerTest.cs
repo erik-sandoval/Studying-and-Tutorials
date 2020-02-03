@@ -1,48 +1,107 @@
 using System;
+using ACM.BL;
 using Xunit;
-
 namespace ACM.BLTest {
     public class CustomerTest {
-        public override bool Equals(object obj) {
-            return base.Equals(obj);
-        }
-
-        public override int GetHashCode() {
-            return base.GetHashCode();
-        }
-
         [Fact]
-        public void TestName() {
-            var customer = new Customer { FirstName = "Bilbo", LastName = "Baggins" };
-
+        public void FullNameTestValid() {
+            //-- Arrange
+            Customer customer = new Customer {
+                FirstName = "Bilbo",
+                LastName = "Baggins"
+            };
             string expected = "Baggins, Bilbo";
 
+            //-- Act
             string actual = customer.FullName;
 
+            //-- Assert
             Assert.Equal(expected, actual);
         }
 
         [Fact]
-        public void TestNameAuth() {
-            var customer = new Customer { FirstName = "Bilbo", };
+        public void FullNameFirstNameEmpty() {
+            //-- Arrange
+            Customer customer = new Customer {
+                LastName = "Baggins"
+            };
+            string expected = "Baggins";
 
-            string expected = "Bilbo";
-
+            //-- Act
             string actual = customer.FullName;
 
+            //-- Assert
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void FullNameLastNameEmpty() {
+            //-- Arrange
+            Customer customer = new Customer {
+                FirstName = "Bilbo"
+            };
+            string expected = "Bilbo";
+
+            //-- Act
+            string actual = customer.FullName;
+
+            //-- Assert
             Assert.Equal(expected, actual);
         }
 
         [Fact]
         public void StaticTest() {
-            var customer1 = new Customer { FirstName = "Bilbo" };
-            Customer.InstanceCount += 1;
-            var customer2 = new Customer { FirstName = "Frodo" };
-            Customer.InstanceCount += 1;
-            var customer3 = new Customer { FirstName = "Rosie" };
+            //-- Arrange
+            var c1 = new Customer();
+            c1.FirstName = "Bilbo";
             Customer.InstanceCount += 1;
 
+            var c2 = new Customer();
+            c2.FirstName = "Frodo";
+            Customer.InstanceCount += 1;
+
+            var c3 = new Customer();
+            c3.FirstName = "Rosie";
+            Customer.InstanceCount += 1;
+
+            //-- Act
+
+            //-- Assert
             Assert.Equal(3, Customer.InstanceCount);
         }
+
+        [Fact]
+        public void ValidateValid() {
+            //-- Arrange
+            var customer = new Customer {
+                LastName = "Baggins",
+                EmailAddress = "fbaggins@hobbiton.me"
+            };
+
+            var expected = true;
+
+            //-- Act
+            var actual = customer.Validate();
+
+            //-- Assert
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ValidateMissingLastName() {
+            //-- Arrange
+            var customer = new Customer {
+                EmailAddress = "fbaggins@hobbiton.me"
+            };
+
+            var expected = false;
+
+            //-- Act
+            var actual = customer.Validate();
+
+            //-- Assert
+            Assert.Equal(expected, actual);
+        }
+
     }
 }
