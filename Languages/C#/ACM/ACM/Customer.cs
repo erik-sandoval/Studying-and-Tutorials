@@ -16,10 +16,9 @@ namespace ACM.BL {
 
         public List<Address> AddressList { get; set; }
         public int CustomerId { get; private set; }
+        public int CusterType { get; set; }
         public string EmailAddress { get; set; }
-
         public string FirstName { get; set; }
-
         public string FullName {
             get {
                 string fullName = LastName;
