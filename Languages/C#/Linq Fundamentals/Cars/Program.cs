@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Xml.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,46 +12,48 @@ namespace Cars
     {
         static void Main(string[] args)
         {
-            var cars = ProcessCars("fuel.csv");
-            var manufacturers = ProcessManufacturers("manufacturers.csv");
+            CreateXml();
+            QueryXml();
+        }
+
+        private static void QueryXml()
+        {
+            var ns = (XNamespace)"http://pluralsight.com/cars/2016";
+            var ex = (XNamespace)"http://pluralsight.com/cars/2016/ex";
+            var document = XDocument.Load("fuel.xml");
 
             var query =
-                from car in cars
-                group car by car.Manufacturer into carGroup
-                select new
-                {
-                    Name = carGroup.Key,
-                    Max = carGroup.Max(c => c.Combined),
-                    Min = carGroup.Min(c => c.Combined),
-                    Avg = carGroup.Average(c => c.Combined)
-                } into result
-                orderby result.Max descending
-                select result;
+                from element in document.Element(ns + "Cars")?.Elements(ex + "Car")
+                                                       ?? Enumerable.Empty<XElement>()
+                where element.Attribute("Manufacturer")?.Value == "BMW"
+                select element.Attribute("Name").Value;
 
+            foreach (var name in query)
+            {
+                Console.WriteLine(name);
+            }
+        }
 
-            var query2 =
-                cars.GroupBy(c => c.Manufacturer)
-                    .Select(g =>
-                    {
-                        var results = g.Aggregate(new CarStatistics(),
-                                            (acc, c) => acc.Accumulate(c),
-                                            acc => acc.Compute());
-                        return new
-                        {
-                            Name = g.Key,
-                            Avg = results.Average,
-                            Min = results.Min,
-                            Max = results.Max
-                        };
-                    })
-                    .OrderByDescending(r => r.Max);
+        private static void CreateXml()
+        {
+            var records = ProcessCars("fuel.csv");
 
+            var ns = (XNamespace)"http://pluralsight.com/cars/2016";
+            var ex = (XNamespace)"http://pluralsight.com/cars/2016/ex";
+            var document = new XDocument();
+            var cars = new XElement(ns + "Cars",
 
+                from record in records
+                select new XElement(ex + "Car",
+                                new XAttribute("Name", record.Name),
+                                new XAttribute("Combined", record.Combined),
+                                new XAttribute("Manufacturer", record.Manufacturer))
+            );
 
-                foreach (var car in query.Take(10))
-                {
-                    Console.WriteLine($"{car.Manufacturer} {car.Name} : {car.Combined}");
-                }
+            cars.Add(new XAttribute(XNamespace.Xmlns + "ex", ex));
+
+            document.Add(cars);
+            document.Save("fuel.xml");
         }
 
         private static List<Car> ProcessCars(string path)
@@ -91,7 +94,7 @@ namespace Cars
             Max = Int32.MinValue;
             Min = Int32.MaxValue;
         }
-
+        
         public CarStatistics Accumulate(Car car)
         {
             Count += 1;
@@ -106,7 +109,7 @@ namespace Cars
             Average = Total / Count;
             return this;
         }
-        
+
         public int Max { get; set; }
         public int Min { get; set; }
         public int Total { get; set; }
