@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
@@ -9,8 +10,24 @@ using System.Threading.Tasks;
 namespace Cars {
     class Program {
         static void Main(string[] args) {
-            CreateXml();
-            QueryXml();
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<CarDb>());
+            InsertData();
+            QueryData();
+        }
+
+        private static void QueryData() { }
+
+        private static void InsertData() {
+            var cars = ProcessCars("fuel.csv");
+            var db = new CarDb();
+
+            if (!db.Cars.Any()) {
+                foreach (var car in cars) {
+                    db.Cars.Add(car);
+                }
+
+                db.SaveChanges();
+            }
         }
 
         private static void QueryXml() {
