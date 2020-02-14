@@ -266,7 +266,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StockAnalyzer.Core\StockAnalyzer.Core.csproj">
-      <Project>{4571844D-AD38-44DA-B934-980858C5EB00}</Project>
+      <Project>{EDC1F252-000A-4289-99C9-B31799A3E161}</Project>
       <Name>StockAnalyzer.Core</Name>
     </ProjectReference>
   </ItemGroup>
@@ -297,6 +297,11 @@
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>
+    <MonoDevelop>
+      <Properties>
+        <XspParameters Port="8080" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
+      </Properties>
+    </MonoDevelop>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
