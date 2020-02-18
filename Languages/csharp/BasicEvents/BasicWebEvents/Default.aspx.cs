@@ -14,5 +14,15 @@ namespace BasicWebEvents
 
         }
 
+        protected void CountriesDropDown_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            OutputLabel.Text = CountriesDropDown.SelectedIndex.ToString();
+        }
+
+        protected void SubmitButton_Click(object sender, EventArgs e)
+        {
+            OutputLabel.Text = "Clicked me";
+        }
+
     }
 }
