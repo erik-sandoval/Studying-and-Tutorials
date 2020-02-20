@@ -1,7 +1,9 @@
 using System.Collections;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
 using OdeToFood.Data;
+using OdeToFood.Core;
 
 namespace OdeToFood.Pages.Restaurants {
     public class List : PageModel {
@@ -9,7 +11,7 @@ namespace OdeToFood.Pages.Restaurants {
          readonly IRestaurantData restaurantData;
         
         public string Message { get; set; }
-        public IEnumerable Restaurants { get; set; }
+        public IEnumerable<Restaurant> Restaurants { get; set; }
 
         public List(IConfiguration config, IRestaurantData restaurantData) {
             this.config = config;

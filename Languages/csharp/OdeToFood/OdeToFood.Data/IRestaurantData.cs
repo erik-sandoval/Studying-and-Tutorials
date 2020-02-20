@@ -20,9 +20,7 @@ namespace OdeToFood.Data {
         }
 
         public IEnumerable<Restaurant> GetAll() {
-            return from r in restaurants
-                orderby r.Name
-                select r;
+            return restaurants.OrderBy(r=> r.Name);
         }
     }
 }
