@@ -1,8 +1,9 @@
 ﻿@page
+@model OdeToFood.NotFoundModel
 @{
     ViewData["Title"] = "NotFound";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
 <h2>Your restaurant was not found</h2>
 <a asp-page="./List" class="btn btn-primary">See All Restaurants</a>
-

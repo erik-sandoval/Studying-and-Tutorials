@@ -1,8 +1,9 @@
-﻿@page "{restaurantId:int}"
-
-@model OdeToFood.Pages.Restaurants.DetailModel
+﻿
+@page "{restaurantId:int}"
+@model OdeToFood.DetailModel
 @{
     ViewData["Title"] = "Detail";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
 <h2>@Model.Restaurant.Name</h2>

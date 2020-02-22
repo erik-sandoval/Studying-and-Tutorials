@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using OdeToFood.Core;
 using OdeToFood.Data;
 
-namespace OdeToFood.Pages.Restaurants {
+namespace OdeToFood {
     public class ListModel : PageModel {
         private readonly IConfiguration config;
         private readonly IRestaurantData restaurantData;
