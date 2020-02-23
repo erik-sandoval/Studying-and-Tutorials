@@ -33,6 +33,11 @@
                    asp-route-restaurantId="@restaurant.Id">
                     View Details
                 </a>
+                <a class="btn btn-lg"
+                   asp-page="./Edit"
+                   asp-route-restaurantId="@restaurant.Id">
+                    Edit
+                </a>
             </td>
         </tr>
     }
