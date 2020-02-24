@@ -12,8 +12,4 @@ namespace OdeToFood.Data {
         Restaurant Delete(int id);
         int Commit();
     }
-
-    public class SqlRestaurantData : IRestaurantData {
-
-    }
 }
