@@ -36,11 +36,6 @@ namespace OdeToFood {
         }
 
         public IActionResult OnPost() {
-
-
-
-
-
             if (!ModelState.IsValid) {
                 Cuisines = htmlHelper.GetEnumSelectList<CuisineType>();
                 return Page();
@@ -51,11 +46,9 @@ namespace OdeToFood {
             } else {
                 restaurantData.Add(Restaurant);
             }
-
             restaurantData.Commit();
             TempData["Message"] = "Restaurant Saved!";
-            return RedirectToPage("./Detail", new { restaurantId = Restaurant.Id, });
-
+            return RedirectToPage("./Detail", new { restaurantId = Restaurant.Id });
         }
     }
 }
