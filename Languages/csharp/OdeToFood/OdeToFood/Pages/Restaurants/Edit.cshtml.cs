@@ -14,24 +14,22 @@ namespace OdeToFood {
         public Restaurant Restaurant { get; set; }
         public IEnumerable<SelectListItem> Cuisines { get; set; }
 
-        public EditModel(IRestaurantData restaurantData, IHtmlHelper htmlHelper) {
+        public EditModel(IRestaurantData restaurantData,
+                         IHtmlHelper htmlHelper) {
             this.restaurantData = restaurantData;
             this.htmlHelper = htmlHelper;
         }
-        public IActionResult OnGet(int? restaurantId) {
 
+        public IActionResult OnGet(int? restaurantId) {
+            Cuisines = htmlHelper.GetEnumSelectList<CuisineType>();
             if (restaurantId.HasValue) {
-                Cuisines = htmlHelper.GetEnumSelectList<CuisineType>();
                 Restaurant = restaurantData.GetById(restaurantId.Value);
             } else {
                 Restaurant = new Restaurant();
-
             }
-
             if (Restaurant == null) {
                 return RedirectToPage("./NotFound");
             }
-
             return Page();
         }
 
@@ -47,7 +45,7 @@ namespace OdeToFood {
                 restaurantData.Add(Restaurant);
             }
             restaurantData.Commit();
-            TempData["Message"] = "Restaurant Saved!";
+            TempData["Message"] = "Restaurant saved!";
             return RedirectToPage("./Detail", new { restaurantId = Restaurant.Id });
         }
     }
