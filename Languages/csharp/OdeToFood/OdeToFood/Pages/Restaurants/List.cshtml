@@ -14,17 +14,18 @@
                    asp-for="SearchTerm" />
             <span class="input-group-append">
                 <button class="btn btn-secondary">
-                    <i class="glyphicon glyphicon-search"></i>
+                    <i class="fas fa-search"></i>
                 </button>
             </span>
         </div>
     </div>
 </form>
 
-
-@foreach (var r in Model.Restaurants) {
-    <partial name="_Summary" model="r" />
-}
+<div class="card-deck">
+    @foreach (var r in Model.Restaurants) {
+        <partial name="_Summary" model="r" />
+    }
+</div>
 
 
 

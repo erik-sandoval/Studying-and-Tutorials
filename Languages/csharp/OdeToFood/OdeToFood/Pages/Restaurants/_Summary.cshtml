@@ -10,20 +10,20 @@
         <span>Cuisine: @Model.Cuisine</span>
     </div>
     <div class="card-footer">
-        <a class="btn btn-outline-secondary"
+        <a class="btn btn-outline-secondary border-0"
            asp-page="./Detail"
            asp-route-restaurantId="@Model.Id">
-            View Details
+            <i class="fas fa-info-circle"></i>
         </a>
-        <a class="btn btn-outline-secondary"
+        <a class="btn btn-outline-secondary border-0"
            asp-page="./Edit"
            asp-route-restaurantId="@Model.Id">
-            Edit
+            <i class="fas fa-edit"></i>
         </a>
-        <a class="btn btn-outline-secondary"
+        <a class="btn btn-outline-secondary border-0"
            asp-page="./Delete"
            asp-route-restaurantId="@Model.Id">
-            Delete
+            <i class="fas fa-trash-alt"></i>
         </a>
     </div>
 </div>
