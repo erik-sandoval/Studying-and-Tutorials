@@ -1,7 +1,7 @@
 body {
   background-color: #1f1f1f;
-  color: #bfbfbf;
   height: 2000px;
+  color: #bfbfbf;
 }
 
 h1 {
@@ -9,7 +9,7 @@ h1 {
 }
 
 em {
-  color: #e07a05;
+  color: #dd740b;
 }
 
 .box {
@@ -20,12 +20,20 @@ em {
 
 .blueBox {
   background: #627da0;
-  position: fixed;
-  /* top: 150px; */
-  bottom: 150px;
-  right: 150px;
+  position: absolute;
+  /* top: 0; */
+  bottom: 20px;
 }
 
 .greenBox {
   background: #5b8054;
+}
+
+.container {
+  background: rgba(0, 0, 0, 0.4);
+  height: 200px;
+  width: 200px;
+  /* margin-top: 150px; */
+  position: absolute;
+  bottom: 20px;
 }
