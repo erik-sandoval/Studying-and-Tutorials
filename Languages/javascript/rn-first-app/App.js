@@ -31,6 +31,13 @@ export default function App() {
         ></TextInput>
         <Button title="ADD" onPress={addGoalHandler}></Button>
       </View>
+      <ScrollView>
+        {courseGoals.map((goal, i) => (
+          <View key={i}>
+            <Text style={styles.listItem}>{goal}</Text>
+          </View>
+        ))}
+      </ScrollView>
     </View>
   );
 }
