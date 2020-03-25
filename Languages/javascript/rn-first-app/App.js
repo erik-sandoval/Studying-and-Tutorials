@@ -1,16 +1,35 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, TextInput, View, Button } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  Button,
+  ScrollView
+} from "react-native";
 
 export default function App() {
-  const [outputText, setOutputText] = useState("dfsdfsdfsd");
+  const [enteredGoal, setEnteredGoal] = useState("");
+  const [courseGoals, setCourseGoals] = useState([]);
+
+  const goalInputHandler = enteredText => {
+    setEnteredGoal(enteredText);
+  };
+
+  const addGoalHandler = () => {
+    setCourseGoals(currentGoals => [...currentGoals, enteredGoal]);
+  };
+
   return (
     <View style={styles.screen}>
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Course Goal"
           style={styles.input}
+          onChangeText={goalInputHandler}
+          value={enteredGoal}
         ></TextInput>
-        <Button title="ADD" style={{ padding: 10 }}></Button>
+        <Button title="ADD" onPress={addGoalHandler}></Button>
       </View>
     </View>
   );
