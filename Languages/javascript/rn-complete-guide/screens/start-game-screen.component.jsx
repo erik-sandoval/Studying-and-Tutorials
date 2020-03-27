@@ -1,19 +1,47 @@
-import React from "react";
-import { StyleSheet, Text, View, TextInput, Button } from "react-native";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Button,
+} from "react-native";
+import Card from "../component/card/card.component";
+import colors from "../constants/colors";
+import Input from "../component/input/input.component";
 
 const StartGameScreen = () => {
   return (
-    <View style={styles.screen}>
-      <Text style={styles.title}>Start a New Game!</Text>
-      <View style={styles.inputContainer}>
-        <Text>Select a Number</Text>
-        <TextInput />
-        <View style={styles.buttonContainer}>
-          <Button title="Reset" onPress={() => {}}></Button>
-          <Button title="Confirm" onPress={() => {}}></Button>
-        </View>
+      <View style={styles.screen}>
+        <Text style={styles.title}>Start a New Game!</Text>
+        <Card style={styles.inputContainer}>
+          <Text>Select a Number</Text>
+          <Input
+            style={styles.input}
+            blurOnSubmit
+            autoCapitalize="none"
+            autoCorrect={false}
+            keyboardType="number-pad"
+            maxLength={2}
+          />
+          <View style={styles.buttonContainer}>
+            <View style={styles.button}>
+              <Button
+                title="Reset"
+                onPress={() => {}}
+                color={colors.accent}
+              ></Button>
+            </View>
+            <View style={styles.button}>
+              <Button
+                title="Confirm"
+                onPress={() => {}}
+                color={colors.primary}
+              ></Button>
+            </View>
+          </View>
+        </Card>
       </View>
-    </View>
   );
 };
 
@@ -25,27 +53,26 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: "center"
   },
-  title: {
-    fontSize: 20,
-    marginVertical: 10
-  },
   inputContainer: {
     width: 300,
     maxWidth: "80%",
-    alignItems: "center",
-    shadowColor: "black",
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 6,
-    shadowOpacity: 0.26,
-    backgroundColor: "white",
-    elevation: 5,
-    padding: 20,
-    borderRadius: 10
+    alignItems: "center"
+  },
+  title: {
+    fontSize: 20,
+    marginVertical: 10
   },
   buttonContainer: {
     flexDirection: "row",
     width: "100%",
     justifyContent: "space-between",
     paddingHorizontal: 15
+  },
+  input: {
+    width: 30,
+    textAlign: "center"
+  },
+  button: {
+    width: 100
   }
 });
