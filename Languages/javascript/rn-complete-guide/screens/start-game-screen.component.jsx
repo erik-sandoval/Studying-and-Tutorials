@@ -13,8 +13,10 @@ import colors from "../constants/colors";
 import Input from "../component/input/input.component";
 import NumberContainer from "../component/card-containers/number-container.component";
 
-const StartGameScreen = () => {
+const StartGameScreen = ({ onStartGame }) => {
   const [enteredValue, setEnteredValue] = useState("");
+  const [confirmed, setConfirmed] = useState(false);
+  const [selectedNumber, setSelectedNumber] = useState("");
 
   const numberInputHandler = inputText => {
     setEnteredValue(inputText.replace(/[^0-9]/g, ""));
@@ -77,6 +79,16 @@ const StartGameScreen = () => {
             </View>
           </View>
         </Card>
+        {confirmed && (
+          <Card style={styles.summaryContainer}>
+            <Text>You Selected</Text>
+            <NumberContainer>{selectedNumber}</NumberContainer>
+            <Button
+              title="START GAME"
+              onPress={() => onStartGame(selectedNumber)}
+            />
+          </Card>
+        )}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -104,6 +116,11 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "space-between",
     paddingHorizontal: 15
+  },
+
+  summaryContainer: {
+    marginTop: 20,
+    alignItems: "center"
   },
   input: {
     width: 30,
