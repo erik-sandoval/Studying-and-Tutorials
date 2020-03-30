@@ -55,9 +55,43 @@ const GameScreen = ({ userChoice, onGameOver }) => {
   };
 
   return (
+    <View style={styles.screen}>
+      <Text>Opponent's Guess:</Text>
+      <NumberContainer>{currentGuess}</NumberContainer>
+      <Card style={styles.buttonContainer}>
+        <View style={styles.button}>
+          <Button
+            title="LOWER"
+            onPress={() => nextGuessHandler("lower")}
+          ></Button>
+        </View>
+        <View style={styles.button}>
+          <Button
+            title="GREATER"
+            onPress={() => nextGuessHandler("greater")}
+          ></Button>
+        </View>
+      </Card>
+    </View>
   );
 };
 
 export default GameScreen;
+
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    padding: 10,
+    alignItems: "center"
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginTop: 20,
+    width: 300,
+    maxWidth: "80%"
+  },
+  button: {
+    width: 80
+  }
 });
