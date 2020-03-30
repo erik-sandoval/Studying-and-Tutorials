@@ -17,6 +17,30 @@ const generateRandomBetween = (min, max, exclude) => {
 };
 
 const GameScreen = ({ userChoice, onGameOver }) => {
+  const nextGuessHandler = direction => {
+    if (
+      (direction === "lower" && currentGuess < userChoice) ||
+      (direction === "greater" && currentGuess > userChoice)
+    ) {
+      Alert.alert("Don't lie!", "You know that this is wrong...", [
+        { text: "Sorry!", style: "cancel" }
+      ]);
+      return;
+    }
+    if (direction === "lower") {
+      currentHigh.current = currentGuess;
+    } else {
+      currentLow.current = currentGuess;
+    }
+    const nextNumber = generateRandomBetween(
+      currentLow.current,
+      currentHigh.current,
+      currentGuess
+    );
+    setCurrentGuess(nextNumber);
+    setRounds(curRounds => curRounds + 1);
+  };
+
   return (
   );
 };
