@@ -9,7 +9,7 @@ import GameScreen from "./screens/game-screen.component";
 import GameOverScreen from "./screens/game-over-screen.component";
 
 const fetchFonts = () => {
-  Font.loadAsync({
+  return Font.loadAsync({
     "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
     "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf")
   });
