@@ -16,24 +16,26 @@ import PrimaryButton from "../component/custom-buttons/primary-button.component"
 
 const GameOverScreen = ({ userNumber, roundsNumber, onRestart }) => {
   return (
-    <View style={styles.screen}>
-      <TitleText>The Game is Over!</TitleText>
-      <View style={styles.imageContainer}>
-        <Image
-          source={require("../assets/success.png")}
-          style={styles.image}
-        ></Image>
+    <ScrollView>
+      <View style={styles.screen}>
+        <TitleText>The Game is Over!</TitleText>
+        <View style={styles.imageContainer}>
+          <Image
+            source={require("../assets/success.png")}
+            style={styles.image}
+          ></Image>
+        </View>
+        <View style={styles.resultContainer}>
+          <BodyText style={styles.resultText}>
+            Your phone took{" "}
+            <Text style={styles.textHightLight}>{roundsNumber}</Text>{" "}
+            {roundsNumber > 1 ? "rounds" : "round"} to guess the number{" "}
+            <Text style={styles.textHightLight}>{userNumber}</Text>.
+          </BodyText>
+        </View>
+        <PrimaryButton onPress={onRestart}>NEW GAME</PrimaryButton>
       </View>
-      <View style={styles.resultContainer}>
-        <BodyText style={styles.resultText}>
-          Your phone took{" "}
-          <Text style={styles.textHightLight}>{roundsNumber}</Text>{" "}
-          {roundsNumber > 1 ? "rounds" : "round"} to guess the number{" "}
-          <Text style={styles.textHightLight}>{userNumber}</Text>.
-        </BodyText>
-      </View>
-      <PrimaryButton onPress={onRestart}>NEW GAME</PrimaryButton>
-    </View>
+    </ScrollView>
   );
 };
 
