@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -23,6 +23,21 @@ const StartGameScreen = ({ onStartGame }) => {
   const [enteredValue, setEnteredValue] = useState("");
   const [confirmed, setConfirmed] = useState(false);
   const [selectedNumber, setSelectedNumber] = useState("");
+  const [buttonWidth, setButtonWidth] = useState(
+    Dimensions.get("window").width / 4
+  );
+
+  useEffect(() => {
+    const adjustButtonLayout = () => {
+      setButtonWidth(Dimensions.get("window").width / 4);
+    };
+
+    Dimensions.addEventListener("change", adjustButtonLayout);
+
+    return () => {
+      Dimensions.removeEventListener("change", adjustButtonLayout);
+    };
+  });
 
   const numberInputHandler = inputText => {
     setEnteredValue(inputText.replace(/[^0-9]/g, ""));
@@ -71,14 +86,14 @@ const StartGameScreen = ({ onStartGame }) => {
                 value={enteredValue}
               />
               <View style={styles.buttonContainer}>
-                <View style={styles.button}>
+                <View style={{ width: buttonWidth }}>
                   <Button
                     title="Reset"
                     onPress={resetInputHandler}
                     color={colors.accent}
                   ></Button>
                 </View>
-                <View style={styles.button}>
+                <View style={{ width: buttonWidth }}>
                   <Button
                     title="Confirm"
                     onPress={confirmInputHandler}
@@ -134,8 +149,5 @@ const styles = StyleSheet.create({
   input: {
     width: 30,
     textAlign: "center"
-  },
-  button: {
-    width: Dimensions.get("window").width / 4
   }
 });
