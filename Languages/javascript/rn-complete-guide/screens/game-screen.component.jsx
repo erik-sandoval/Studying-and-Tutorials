@@ -39,8 +39,28 @@ const GameScreen = ({ userChoice, onGameOver }) => {
   const initialGuess = generateRandomBetween(1, 100, userChoice);
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
   const [pastGuesses, setPastGuesses] = useState([initialGuess]);
+  const [availableDeviceWidth, setAvailableDeviceWidth] = useState(
+    Dimensions.get("window").width
+  );
+  const [availableDeviceHeight, setAvailableDeviceHeight] = useState(
+    Dimensions.get("window").height
+  );
+
   const currentLow = useRef(1);
   const currentHigh = useRef(100);
+
+  useEffect(() => {
+    const updateLayout = () => {
+      setAvailableDeviceWidth(Dimensions.get("window").width);
+      setAvailableDeviceHeight(Dimensions.get("window").height);
+    };
+
+    Dimensions.addEventListener("change", updateLayout);
+
+    return () => {
+      Dimensions.removeEventListener("change", updateLayout);
+    };
+  });
 
   useEffect(() => {
     if (currentGuess === userChoice) {
@@ -71,6 +91,31 @@ const GameScreen = ({ userChoice, onGameOver }) => {
     setCurrentGuess(nextNumber);
     setPastGuesses(currPastGuesses => [nextNumber, ...currPastGuesses]);
   };
+
+  if (availableDeviceHeight < 500) {
+    return (
+      <View style={styles.screen}>
+        <BodyText>Opponent's Guess:</BodyText>
+        <View style={styles.controls}>
+          <PrimaryButton onPress={() => nextGuessHandler("lower")}>
+            <Ionicons name="md-remove" size={24} color="white"></Ionicons>
+          </PrimaryButton>
+          <NumberContainer>{currentGuess}</NumberContainer>
+
+          <PrimaryButton onPress={() => nextGuessHandler("greater")}>
+            <Ionicons name="md-add" size={24} color="white"></Ionicons>
+          </PrimaryButton>
+        </View>
+        <View style={styles.listContainer}>
+          <ScrollView contentContainerStyle={styles.list}>
+            {pastGuesses.map((guess, index) =>
+              renderListItem(guess, pastGuesses.length - index)
+            )}
+          </ScrollView>
+        </View>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.screen}>
@@ -118,6 +163,12 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     alignItems: "center",
     justifyContent: "flex-end"
+  },
+  controls: {
+    width: "80%",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center"
   },
   listItem: {
     borderColor: "#ccc",
