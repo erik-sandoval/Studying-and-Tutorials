@@ -3,7 +3,7 @@ import { StyleSheet, TextInput, View, Button, Modal } from "react-native";
 
 const GoalInput = ({ addGoal, isVisible, cancelAddGoal }) => {
   const [enteredGoal, setEnteredGoal] = useState("");
-
+// hello
   const goalInputHandler = enteredText => {
     setEnteredGoal(enteredText);
   };
