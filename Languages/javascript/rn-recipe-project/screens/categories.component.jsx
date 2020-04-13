@@ -8,23 +8,21 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { CATEGORIES } from "../data/dummy-data";
+import CategoryGridTile from "../components/category-grid-tile/category-grid-tile.component";
 
 const CategoriesScreen = ({ navigation }) => {
   const renderGridItem = (itemData) => {
     return (
-      <TouchableOpacity
-        style={styles.gridItem}
-        onPress={() =>
+      <CategoryGridTile
+        title={itemData.item.title}
+        color={itemData.item.color}
+        onSelect={() =>
           navigation.navigate({
             routeName: "CategoryMeals",
             params: { categoryId: itemData.item.id },
           })
         }
-      >
-        <View>
-          <Text>{itemData.item.title}</Text>
-        </View>
-      </TouchableOpacity>
+      ></CategoryGridTile>
     );
   };
 
