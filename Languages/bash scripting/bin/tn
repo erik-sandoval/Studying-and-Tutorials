@@ -1,4 +1,12 @@
 #!/bin/bash
 
-echo $(date): $* >> ~/notes.txt
-echo Note saved: $*
+date=$(date)
+
+topic="$1"
+set -x
+filename="${HOME}/Documents/GitHub/Studying-and-Tutorials/Languages/bash scripting/bin/${topic}notes.txt"
+set +x
+read -p "Your note: " note
+
+echo "$date: $note" >> "$filename"
+echo "Note '$note' saved to $filename"
