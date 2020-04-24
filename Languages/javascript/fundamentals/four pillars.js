@@ -4,6 +4,7 @@ class Animal {
   }
 
   speak() {
+    console.log('hi')
     return this.sound;
   }
 }
