@@ -1,11 +1,11 @@
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
-
 import static io.restassured.RestAssured.*;
+
 import static org.hamcrest.Matchers.*;
 
 import org.testng.Assert;
 
+import files.ReusableMethods;
 import files.payload;
 
 public class Basics {
@@ -18,9 +18,7 @@ public class Basics {
 				.body("scope", equalTo("APP")).header("Server", "Apache/2.4.18 (Ubuntu)").extract().response()
 				.asString();
 
-		JsonPath js = new JsonPath(res);
-
-		String placeId = js.get("place_id");
+		String placeId = ReusableMethods.jsonConvert(res).get("place_id");
 
 		String newPlace = "293 Something Test, USA";
 
@@ -33,9 +31,7 @@ public class Basics {
 		String getPlaceRes = given().queryParam("key", "qaclick123").queryParam("place_id", placeId).when()
 				.get("maps/api/place/get/json").then().assertThat().statusCode(200).extract().response().asString();
 
-		JsonPath js1 = new JsonPath(getPlaceRes);
-
-		String actualAddress = js1.get("address");
+		String actualAddress = ReusableMethods.jsonConvert(getPlaceRes).get("address");
 
 		Assert.assertEquals(actualAddress, newPlace);
 
