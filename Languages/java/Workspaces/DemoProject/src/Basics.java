@@ -1,8 +1,11 @@
 import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
+
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
 import files.payload;
+import groovy.util.logging.Log;
 
 public class Basics {
 
@@ -23,6 +26,10 @@ public class Basics {
 						+ "\"key\":\"qaclick123\"\n" + "}")
 				.when().put("maps/api/place/update/json").then().assertThat().statusCode(200)
 				.body("msg", equalTo("Address successfully updated"));
+
+		given().queryParam("key", "qaclick123").queryParam("place_id", placeId).when().get("maps/api/place/get/json")
+				.then().assertThat().statusCode(200).body("address", equalTo("70 Summer walk, USA"));
+
 	}
 
 }
