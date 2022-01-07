@@ -4,8 +4,9 @@ import io.restassured.path.json.JsonPath;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
+import org.testng.Assert;
+
 import files.payload;
-import groovy.util.logging.Log;
 
 public class Basics {
 
@@ -29,8 +30,14 @@ public class Basics {
 				.when().put("maps/api/place/update/json").then().assertThat().statusCode(200)
 				.body("msg", equalTo("Address successfully updated"));
 
-		given().queryParam("key", "qaclick123").queryParam("place_id", placeId).when().get("maps/api/place/get/json")
-				.then().assertThat().statusCode(200).body("address", equalTo(newPlace));
+		String getPlaceRes = given().queryParam("key", "qaclick123").queryParam("place_id", placeId).when()
+				.get("maps/api/place/get/json").then().assertThat().statusCode(200).extract().response().asString();
+
+		JsonPath js1 = new JsonPath(getPlaceRes);
+
+		String actualAddress = js1.get("address");
+
+		Assert.assertEquals(actualAddress, newPlace);
 
 	}
 
