@@ -21,14 +21,16 @@ public class Basics {
 
 		String placeId = js.get("place_id");
 
+		String newPlace = "293 Something Test, USA";
+
 		given().queryParam("key", "qaclick123").header("Content-Type", "application/json")
-				.body("{\n" + "\"place_id\":\"" + placeId + "\",\n" + "\"address\":\"70 Summer walk, USA\",\n"
+				.body("{\n" + "\"place_id\":\"" + placeId + "\",\n" + "\"address\":\"" + newPlace + "\",\n"
 						+ "\"key\":\"qaclick123\"\n" + "}")
 				.when().put("maps/api/place/update/json").then().assertThat().statusCode(200)
 				.body("msg", equalTo("Address successfully updated"));
 
 		given().queryParam("key", "qaclick123").queryParam("place_id", placeId).when().get("maps/api/place/get/json")
-				.then().assertThat().statusCode(200).body("address", equalTo("70 Summer walk, USA"));
+				.then().assertThat().statusCode(200).body("address", equalTo(newPlace));
 
 	}
 
