@@ -18,8 +18,6 @@ public class ComplexJsonParse {
 			System.out.println(title + " price: $" + price + ".00");
 		}
 
-		System.out.println(purchaseAmount);
-
 		for (int i = 0; i < count; i++) {
 			String title = js.get("courses[" + i + "].title");
 
@@ -33,6 +31,20 @@ public class ComplexJsonParse {
 
 			}
 
+		}
+
+		int coursePriceTotal = 0;
+
+		for (int i = 0; i < count; i++) {
+			int price = js.get("courses[" + i + "].price");
+			int copies = js.get("courses[" + i + "].copies");
+
+			coursePriceTotal += price * copies;
+
+		}
+
+		if (coursePriceTotal == purchaseAmount) {
+			System.out.println(coursePriceTotal + " equals the purchase amount " + purchaseAmount);
 		}
 
 	}
