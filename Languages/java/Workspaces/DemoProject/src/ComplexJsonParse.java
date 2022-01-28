@@ -19,6 +19,22 @@ public class ComplexJsonParse {
 		}
 
 		System.out.println(purchaseAmount);
+
+		for (int i = 0; i < count; i++) {
+			String title = js.get("courses[" + i + "].title");
+
+			if (title.equals("RPA")) {
+
+				int price = js.get("courses[" + i + "].price");
+
+				System.out.println(title + " price: $" + price + ".00");
+
+				break;
+
+			}
+
+		}
+
 	}
 
 }
