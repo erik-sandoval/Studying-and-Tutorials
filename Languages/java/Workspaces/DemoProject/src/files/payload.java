@@ -9,53 +9,19 @@ public class payload {
 				+ "  \"types\": [\n" + "    \"shoe park\",\n" + "    \"shop\"\n" + "  ],\n"
 				+ "  \"website\": \"http://google.com\",\n" + "  \"language\": \"French-IN\"\n" + "}";
 	}
-	
+
 	public static String CoursePrice() {
-		return "{\n"
-				+ "\n"
-				+ "\"dashboard\": {\n"
-				+ "\n"
-				+ "\"purchaseAmount\": 910,\n"
-				+ "\n"
-				+ "\"website\": \"rahulshettyacademy.com\"\n"
-				+ "\n"
-				+ "},\n"
-				+ "\n"
-				+ "\"courses\": [\n"
-				+ "\n"
-				+ "{\n"
-				+ "\n"
-				+ "\"title\": \"Selenium Python\",\n"
-				+ "\n"
-				+ "\"price\": 50,\n"
-				+ "\n"
-				+ "\"copies\": 6\n"
-				+ "\n"
-				+ "},\n"
-				+ "\n"
-				+ "{\n"
-				+ "\n"
-				+ "\"title\": \"Cypress\",\n"
-				+ "\n"
-				+ "\"price\": 40,\n"
-				+ "\n"
-				+ "\"copies\": 4\n"
-				+ "\n"
-				+ "},\n"
-				+ "\n"
-				+ "{\n"
-				+ "\n"
-				+ "\"title\": \"RPA\",\n"
-				+ "\n"
-				+ "\"price\": 45,\n"
-				+ "\n"
-				+ "\"copies\": 10\n"
-				+ "\n"
-				+ "}\n"
-				+ "\n"
-				+ "]\n"
-				+ "\n"
-				+ "}";
+		return "{\n" + "\n" + "\"dashboard\": {\n" + "\n" + "\"purchaseAmount\": 910,\n" + "\n"
+				+ "\"website\": \"rahulshettyacademy.com\"\n" + "\n" + "},\n" + "\n" + "\"courses\": [\n" + "\n" + "{\n"
+				+ "\n" + "\"title\": \"Selenium Python\",\n" + "\n" + "\"price\": 50,\n" + "\n" + "\"copies\": 6\n"
+				+ "\n" + "},\n" + "\n" + "{\n" + "\n" + "\"title\": \"Cypress\",\n" + "\n" + "\"price\": 40,\n" + "\n"
+				+ "\"copies\": 4\n" + "\n" + "},\n" + "\n" + "{\n" + "\n" + "\"title\": \"RPA\",\n" + "\n"
+				+ "\"price\": 45,\n" + "\n" + "\"copies\": 10\n" + "\n" + "}\n" + "\n" + "]\n" + "\n" + "}";
+	}
+
+	public static String AddBook() {
+		return "{\n" + "\"name\":\"Learn Appium Automation with Java\",\n" + "\"isbn\":\"bcd\",\n"
+				+ "\"aisle\":\"2926\",\n" + "\"author\":\"John foer\"\n" + "}\n" + "";
 	}
 
 }
