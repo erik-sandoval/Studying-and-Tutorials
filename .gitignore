@@ -5,3 +5,4 @@ Languages/C#/gradebook/Erik's Gradebook.txt
 Languages/java/Workspaces/DemoProject/test-output/
 *.iml
 *.xml
+*.pyc
