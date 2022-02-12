@@ -9,14 +9,6 @@ class BlogTest(TestCase):
         self.assertEqual("John Appleseed", blog.author)
         self.assertListEqual([], blog.posts)
 
-    def test_create_post(self):
-        blog = Blog("Test Blog", "John Appleseed")
-        blog.create_post("How lose weight", "test content")
-
-        self.assertEqual("Test Blog", blog.title)
-        self.assertEqual("John Appleseed", blog.author)
-        self.assertListEqual([{"title": "How lose weight", "content": "test content"}], blog.posts)
-
     def test_repr(self):
         blog = Blog("Test Blog", "John Appleseed")
         blog1 = Blog("Test Blog 2", "Erik")
@@ -40,13 +32,3 @@ class BlogTest(TestCase):
         blog.create_post("test", "content")
 
         self.assertEqual("Test Blog by Erik (3 posts)", blog.__repr__())
-
-    def test_json(self):
-        blog = Blog("Test Blog", "Erik")
-        blog1 = Blog("Test Blog", "Erik")
-
-        blog1.create_post("How lose weight", "test content")
-
-        self.assertDictEqual({"title": "Test Blog", "author": "Erik", "posts": []}, blog.json())
-        self.assertDictEqual({"title": "Test Blog", "author": "Erik",
-                              "posts": [{"title": "How lose weight", "content": "test content"}]}, blog1.json())
